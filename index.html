@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jungle Party</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+    background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') no-repeat center center/cover;
+    overflow-x: hidden;
+}
+
+.overlay {
+    background: rgba(0,0,0,0.7);
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.timer {
+    font-size: 26px;
+    margin: 20px 0;
+}
+
+.photo {
+    width: 200px;
+    border-radius: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 20px #2ecc71;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #27ae60;
+    color: white;
+}
+
+.map {
+    margin-top: 30px;
+}
+
+footer {
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+/* Листья */
+.leaf {
+    position: fixed;
+    top: -50px;
+    width: 30px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+<h1>🌿 Jungle Birthday Party 🌿</h1>
+<h2>25 февраля в 18:00</h2>
+
+<div class="timer" id="countdown"></div>
+
+<!-- Фото -->
+<img src="birthday.jpg" class="photo" alt="Именинник">
+
+<h3>Подтвердите участие:</h3>
+
+<a href="ССЫЛКА_НА_ФОРМУ" target="_blank">
+<button>Ответить 🐒</button>
+</a>
+
+<div class="map">
+<h3>📍 Место проведения</h3>
+<iframe 
+src="https://www.google.com/maps?q=Москва&output=embed"
+width="90%" height="250" style="border:0;" allowfullscreen>
+</iframe>
+</div>
+
+<footer>
+Дресс-код: стиль джунгли 🌴<br>
+Будет жарко 🔥
+</footer>
+
+<!-- Музыка -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<button onclick="document.getElementById('music').play()">🎵 Включить музыку</button>
+
+</div>
+
+<script>
+// Таймер
+var eventDate = new Date("Feb 25, 2026 18:00:00").getTime();
+var x = setInterval(function() {
+var now = new Date().getTime();
+var distance = eventDate - now;
+var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+document.getElementById("countdown").innerHTML =
+"До вечеринки осталось: " + days + "д " + hours + "ч "
++ minutes + "м " + seconds + "с ";
+if (distance < 0) {
+clearInterval(x);
+document.getElementById("countdown").innerHTML = "Вечеринка началась!";
+}
+}, 1000);
+
+// Листья
+for (let i = 0; i < 15; i++) {
+    let leaf = document.createElement("img");
+    leaf.src = "https://pngimg.com/uploads/leaf/leaf_PNG36800.png";
+    leaf.className = "leaf";
+    leaf.style.left = Math.random() * 100 + "vw";
+    leaf.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(leaf);
+}
+</script>
+
+</body>
+</html>
